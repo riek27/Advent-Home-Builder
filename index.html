@@ -1,576 +1,45 @@
+<!-- ========== index.html ========== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advent Homes • luxury pool builders, Houston</title>
-  <!-- fonts & icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* ---------- RESET & VARIABLES ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      color: #1e1e1e;
-      background-color: #ffffff;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom: 1.5rem;
-      color: #0E1A26;
-    }
-
-    .section-subhead {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #a67c4d;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* ---------- COLOR PALETTE ---------- */
-    :root {
-      --navy: #0E1A26;
-      --charcoal: #2C2F33;
-      --sand: #E7D9C6;
-      --aqua: #3EB9B0;
-      --gold: #C5A267;
-      --white: #FFFFFF;
-      --light-bg: #F9F7F4;
-    }
-
-    /* ---------- NAVIGATION (sticky, transparent to solid) ---------- */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      transition: background 0.4s ease, box-shadow 0.3s, padding 0.3s;
-      background: transparent;
-    }
-
-    .navbar.scrolled {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      padding: 1rem 2rem;
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--white);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .navbar.scrolled .logo {
-      color: var(--navy);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-    }
-
-    .nav-links a {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .navbar.scrolled .nav-links a {
-      color: var(--navy);
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    /* ---------- HERO SECTION (fullscreen) ---------- */
-    .hero {
-      height: 100vh;
-      width: 100%;
-      background: linear-gradient(rgba(14,26,38,0.4), rgba(14,26,38,0.2)), url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=2670&auto=format&fit=crop') center/cover no-repeat fixed;
-      display: flex;
-      align-items: center;
-      position: relative;
-      color: white;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(14,26,38,0.2);
-      pointer-events: none;
-    }
-
-    .hero-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 3rem;
-      position: relative;
-      z-index: 5;
-    }
-
-    .hero-text {
-      flex: 1 1 400px;
-    }
-
-    .hero-text h1 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 300;
-      line-height: 1.2;
-      color: white;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
-    #typing {
-      min-height: 7rem;
-      display: inline-block;
-    }
-
-    .static-text {
-      font-family: 'Cormorant Garamond', serif;
-      display: block;
-      font-size: 1.8rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      margin-top: 1rem;
-      color: var(--sand);
-    }
-
-    .hero-quote {
-      flex: 1 1 360px;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 25px 40px -10px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .hero-quote h3 {
-      font-size: 1.8rem;
-      color: white;
-      margin-bottom: 1.8rem;
-      font-weight: 300;
-    }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 2rem;
-    }
-
-    .input-group input,
-    .input-group textarea {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding: 0.8rem 0;
-      font-size: 1rem;
-      color: white;
-      outline: none;
-      transition: border 0.3s;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .input-group textarea {
-      resize: none;
-      min-height: 60px;
-    }
-
-    .input-group label {
-      position: absolute;
-      left: 0;
-      top: 0.8rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 300;
-      font-size: 1rem;
-      pointer-events: none;
-      transition: 0.2s ease-out;
-    }
-
-    .input-group input:focus ~ label,
-    .input-group textarea:focus ~ label,
-    .input-group.filled label {
-      top: -1.2rem;
-      font-size: 0.8rem;
-      color: var(--gold);
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, #C5A267, #B38B54);
-      border: none;
-      color: var(--navy);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      width: 100%;
-      font-size: 1rem;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    }
-
-    .btn-gold:hover {
-      transform: scale(1.02);
-      box-shadow: 0 12px 24px rgba(197,162,103,0.4);
-      background: linear-gradient(135deg, #B38B54, #C5A267);
-    }
-
-    /* ---------- TRUST SECTION ---------- */
-    .trust-section {
-      padding: 6rem 0;
-      background: var(--white);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 3rem;
-      margin-top: 3rem;
-    }
-
-    .trust-card {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      background: white;
-      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.03);
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
-
-    .trust-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 40px -10px rgba(0,0,0,0.1);
-    }
-
-    .trust-card i {
-      font-size: 3rem;
-      color: var(--aqua);
-      margin-bottom: 1.5rem;
-    }
-
-    .trust-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .trust-card p {
-      font-size: 0.95rem;
-      color: #4a4a4a;
-    }
-
-    /* ---------- FEATURED PROJECTS (horizontal scroll) ---------- */
-    .projects-section {
-      padding: 4rem 0 6rem;
-      background: var(--light-bg);
-    }
-
-    .projects-horizontal {
-      display: flex;
-      overflow-x: auto;
-      gap: 2rem;
-      padding: 2rem 0;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold) #e0d6cb;
-    }
-
-    .projects-horizontal::-webkit-scrollbar {
-      height: 6px;
-    }
-    .projects-horizontal::-webkit-scrollbar-thumb {
-      background: var(--gold);
-      border-radius: 10px;
-    }
-
-    .project-card {
-      flex: 0 0 380px;
-      height: 480px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-      box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2);
-      transition: transform 0.5s;
-    }
-
-    .project-card:hover {
-      transform: scale(1.02);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 1.2s ease;
-    }
-
-    .project-card:hover img {
-      transform: scale(1.1);
-    }
-
-    .project-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 2rem 1.5rem;
-      background: linear-gradient(transparent, rgba(14,26,38,0.8));
-      color: white;
-      transform: translateY(0);
-    }
-
-    .btn-outline {
-      display: inline-block;
-      margin-top: 3rem;
-      padding: 1rem 3rem;
-      border: 1px solid var(--navy);
-      color: var(--navy);
-      text-decoration: none;
-      letter-spacing: 0.2em;
-      transition: 0.3s;
-    }
-    .btn-outline:hover {
-      background: var(--navy);
-      color: white;
-    }
-
-    /* ---------- PROCESS ---------- */
-    .process {
-      padding: 6rem 0;
-      background: white;
-    }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 1rem;
-      margin-top: 4rem;
-    }
-    .step {
-      position: relative;
-      padding: 2rem;
-      border-right: 1px solid #ddd;
-    }
-    .step:last-child { border-right: none; }
-    .step h4 { font-size: 2rem; color: var(--aqua); margin-bottom: 1rem; }
-    .step p { font-weight: 300; }
-
-    /* ---------- CTA full width ---------- */
-    .cta-full {
-      background: linear-gradient(rgba(14,26,38,0.6), rgba(14,26,38,0.7)), url('https://images.unsplash.com/photo-1576013556827-5248f5c9b0d6?q=80&w=2070&auto=format&fit=crop') center/cover fixed;
-      padding: 8rem 0;
-      text-align: center;
-      color: white;
-    }
-    .cta-full h2 { color: white; font-size: 4rem; }
-    .btn-large {
-      background: transparent;
-      border: 2px solid var(--gold);
-      color: white;
-      padding: 1.2rem 4rem;
-      font-size: 1.2rem;
-      letter-spacing: 0.2em;
-      transition: 0.4s;
-    }
-    .btn-large:hover {
-      background: var(--gold);
-      color: var(--navy);
-    }
-
-    /* ---------- ABOUT / SERVICES / GALLERY / CONTACT sections (generic) ---------- */
-    .about-section, .services-section, .gallery-section, .contact-section {
-      padding: 6rem 0;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-img img, .service-img img {
-      width: 100%;
-      height: auto;
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 2rem;
-    }
-
-    .service-card {
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      transition: 0.6s;
-    }
-    .service-card:hover img { transform: scale(1.05); }
-    .service-card h4 { margin: 1.5rem 0 0.5rem; font-size: 1.6rem; }
-
-    /* gallery masonry */
-    .gallery-filter {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .filter-btn {
-      background: none;
-      border: none;
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      color: #666;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .filter-btn.active, .filter-btn:hover { color: var(--gold); }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .gallery-item {
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      transition: 0.5s;
-    }
-    .gallery-item:hover img { transform: scale(1.1); }
-
-    /* contact */
-    .contact-info i { color: var(--gold); width: 30px; }
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      background: #f5f3f0;
-      border: none;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .map-placeholder {
-      background: #ddd;
-      height: 250px;
-      margin-top: 2rem;
-    }
-
-    /* footer */
-    .footer {
-      background: var(--navy);
-      color: #ccc;
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    /* animations */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s, transform 0.8s;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* mobile */
-    @media (max-width: 900px) {
-      .navbar { padding: 1rem; }
-      .nav-links { gap: 1.5rem; }
-      .hero-container { flex-direction: column; justify-content: center; }
-      .process-steps { grid-template-columns: 1fr; }
-      .two-col { grid-template-columns: 1fr; }
-      .service-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <title>Advent Homes – Luxury Pools Houston</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- slim navbar with CTA -->
   <nav class="navbar" id="navbar">
-    <a href="#" class="logo">ADVENT HOMES</a>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
+    <div class="nav-container">
+      <a href="index.html" class="logo">ADVENT HOMES</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="tel:+17135552024" class="cta-phone"><i class="fas fa-phone-alt"></i> 713.555.2024</a>
+        <a href="contact.html" class="cta-button">Get Started</a>
+      </div>
+      <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
     </div>
   </nav>
 
-  <!-- HOME SECTION (includes hero, trust, featured projects, process, cta) -->
-  <section id="home">
-    <!-- HERO -->
-    <div class="hero">
-      <div class="hero-container">
-        <div class="hero-text">
-          <h1>
-            <span id="typing"></span>
-            <span class="static-text" id="static-line"></span>
-          </h1>
-        </div>
-        <div class="hero-quote">
-          <h3>Begin your design</h3>
+  <!-- HERO SECTION (fullscreen) -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-text">
+        <h1>Houston’s Finest<br>Outdoor Living</h1>
+        <div class="hero-subtitle" id="typing-subtitle"></div>
+        <p class="hero-description">We create extraordinary outdoor living spaces for Houston’s most discerning homeowners.</p>
+        <a href="contact.html" class="btn-gold">Start Your Design</a>
+      </div>
+      <div class="hero-quote">
+        <h3>Request a private consultation</h3>
+        <form id="hero-quote-form">
           <div class="input-group">
             <input type="text" id="name" required>
             <label for="name">Full name</label>
@@ -585,42 +54,46 @@
           </div>
           <div class="input-group">
             <textarea id="message" rows="2"></textarea>
-            <label for="message">Project details</label>
+            <label for="message">Tell us about your dream pool</label>
           </div>
-          <button class="btn-gold">Request Your Free Design Consultation</button>
-        </div>
+          <button type="submit" class="btn-gold btn-block">Submit</button>
+        </form>
       </div>
     </div>
+  </section>
 
-    <!-- TRUST -->
-    <div class="trust-section container fade-up">
-      <span class="section-subhead">why advent</span>
+  <!-- TRUST SECTION -->
+  <section class="trust-section fade-up">
+    <div class="container">
+      <span class="section-subhead">Why Advent</span>
       <h2>Houston’s Premier Pool Design & Build Firm</h2>
       <div class="trust-grid">
-        <div class="trust-card"><i class="fas fa-drafting-compass"></i><h3>Custom Architectural Design</h3><p>Sculptural pools that embrace your home's architecture.</p></div>
+        <div class="trust-card"><i class="fas fa-drafting-compass"></i><h3>Custom Architectural Design</h3><p>Sculptural pools that embrace your home’s architecture.</p></div>
         <div class="trust-card"><i class="fas fa-hard-hat"></i><h3>White-Glove Construction</h3><p>We treat every backyard as a private sanctuary.</p></div>
         <div class="trust-card"><i class="fas fa-gem"></i><h3>Premium Materials</h3><p>Natural stone, custom tiles, vanishing edges.</p></div>
         <div class="trust-card"><i class="fas fa-calendar-check"></i><h3>On-Time Delivery</h3><p>Respecting your timeline & peace of mind.</p></div>
       </div>
     </div>
+  </section>
 
-    <!-- FEATURED PROJECTS -->
-    <div class="projects-section fade-up">
-      <div class="container">
-        <span class="section-subhead">Portfolio</span>
-        <h2>Cinematic outdoor living</h2>
-      </div>
-      <div class="projects-horizontal container">
-        <div class="project-card"><img src="https://images.unsplash.com/photo-1605286978633-607b8581e96c?q=80&w=1974&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Mediterranean Oasis</h3><p>River Oaks</p></div></div>
-        <div class="project-card"><img src="https://images.unsplash.com/photo-1576013556827-5248f5c9b0d6?q=80&w=2070&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Infinity Edge</h3><p>Memorial</p></div></div>
-        <div class="project-card"><img src="https://images.unsplash.com/photo-1626186820515-1925c2064b6f?q=80&w=1973&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Geometric Lagoon</h3><p>West U</p></div></div>
-        <div class="project-card"><img src="https://images.unsplash.com/photo-1598908317386-79fb0aabb226?q=80&w=2070&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Modern Spa</h3><p>Tanglewood</p></div></div>
-      </div>
-      <div class="container" style="text-align:center;"><a href="#gallery" class="btn-outline">EXPLORE OUR PORTFOLIO</a></div>
+  <!-- FEATURED PROJECTS -->
+  <section class="projects-section fade-up">
+    <div class="container">
+      <span class="section-subhead">Portfolio</span>
+      <h2>Cinematic outdoor living</h2>
     </div>
+    <div class="projects-horizontal container">
+      <div class="project-card"><img src="https://images.unsplash.com/photo-1605286978633-607b8581e96c?q=80&w=1974&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Mediterranean Oasis</h3><p>River Oaks</p></div></div>
+      <div class="project-card"><img src="https://images.unsplash.com/photo-1576013556827-5248f5c9b0d6?q=80&w=2070&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Infinity Edge</h3><p>Memorial</p></div></div>
+      <div class="project-card"><img src="https://images.unsplash.com/photo-1626186820515-1925c2064b6f?q=80&w=1973&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Geometric Lagoon</h3><p>West U</p></div></div>
+      <div class="project-card"><img src="https://images.unsplash.com/photo-1598908317386-79fb0aabb226?q=80&w=2070&auto=format&fit=crop" alt="pool"><div class="project-overlay"><h3>Modern Spa</h3><p>Tanglewood</p></div></div>
+    </div>
+    <div class="container text-center"><a href="gallery.html" class="btn-outline">Explore Full Portfolio</a></div>
+  </section>
 
-    <!-- PROCESS -->
-    <div class="process container fade-up">
+  <!-- PROCESS -->
+  <section class="process-section fade-up">
+    <div class="container">
       <span class="section-subhead">Seamless experience</span>
       <h2>Our 4‑step process</h2>
       <div class="process-steps">
@@ -630,204 +103,41 @@
         <div class="step"><h4>04</h4><h3>Final Reveal</h3><p>Handover & celebration under the stars.</p></div>
       </div>
     </div>
+  </section>
 
-    <!-- HIGH-END CTA -->
-    <div class="cta-full">
-      <div class="container">
-        <h2>Your Dream Backyard Starts Here.</h2>
-        <p style="margin:1rem 0 2rem; font-size:1.3rem;">Schedule your private design consultation today.</p>
-        <button class="btn-large">START YOUR PROJECT</button>
-      </div>
+  <!-- CTA BANNER -->
+  <section class="cta-full">
+    <div class="container">
+      <h2>Your Dream Backyard Starts Here.</h2>
+      <p style="margin:1rem 0 2rem; font-size:1.3rem;">Schedule your private design consultation today.</p>
+      <a href="contact.html" class="btn-large">Start Your Project</a>
     </div>
   </section>
 
-  <!-- ABOUT PAGE (luxury editorial) -->
-  <section id="about" class="about-section container fade-up">
-    <span class="section-subhead">About</span>
-    <h2>Houston roots, <br>worldwide craftsmanship</h2>
-    <div class="two-col">
-      <div><p style="font-size:1.2rem; margin-bottom:2rem;">Advent Homes was born from a belief that a pool is not a hole in the ground—it's architecture, emotion, and legacy. For two decades, we've partnered with Houston's most esteemed families to shape water, stone, and light into living art.</p>
-      <p>We're a team of designers, engineers, and artists who approach every project as a gallery piece. Your privacy, your taste, your timeline—honored.</p></div>
-      <div class="about-img"><img src="https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?q=80&w=2070&auto=format&fit=crop" alt="architectural pool"></div>
-    </div>
-  </section>
-
-  <!-- SERVICES PAGE -->
-  <section id="services" class="services-section container fade-up">
-    <span class="section-subhead">expertise</span>
-    <h2>Art & engineering</h2>
-    <div class="service-grid">
-      <div class="service-card"><img src="https://images.unsplash.com/photo-1551893478-d726eaf0442c?q=80&w=1974&auto=format&fit=crop" alt="design"><h4>Custom Pool Design</h4><p>from $150k</p></div>
-      <div class="service-card"><img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?q=80&w=2070&auto=format&fit=crop" alt="construction"><h4>Pool Construction</h4><p>white‑glove delivery</p></div>
-      <div class="service-card"><img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=2070&auto=format&fit=crop" alt="outdoor"><h4>Outdoor Kitchens & Living</h4><p>seamless flow</p></div>
-      <div class="service-card"><img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=2070&auto=format&fit=crop" alt="renovation"><h4>Renovations & Water Features</h4><p>modern classics</p></div>
-    </div>
-  </section>
-
-  <!-- GALLERY PAGE -->
-  <section id="gallery" class="gallery-section container fade-up">
-    <span class="section-subhead">Inspiration</span>
-    <h2>Completed works</h2>
-    <div class="gallery-filter">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="modern">Modern</button>
-      <button class="filter-btn" data-filter="resort">Resort Style</button>
-      <button class="filter-btn" data-filter="family">Family Pools</button>
-    </div>
-    <div class="gallery-grid">
-      <div class="gallery-item modern"><img src="https://images.unsplash.com/photo-1612874741937-0f906f5c209d?q=80&w=1974&auto=format&fit=crop" alt="modern pool"></div>
-      <div class="gallery-item resort"><img src="https://images.unsplash.com/photo-1626186820515-1925c2064b6f?q=80&w=1973&auto=format&fit=crop" alt="resort"></div>
-      <div class="gallery-item family"><img src="https://images.unsplash.com/photo-1598908317386-79fb0aabb226?q=80&w=2070&auto=format&fit=crop" alt="family"></div>
-      <div class="gallery-item modern"><img src="https://images.unsplash.com/photo-1605286978633-607b8581e96c?q=80&w=1974&auto=format&fit=crop" alt="modern"></div>
-      <div class="gallery-item resort"><img src="https://images.unsplash.com/photo-1576013556827-5248f5c9b0d6?q=80&w=2070&auto=format&fit=crop" alt="resort"></div>
-    </div>
-  </section>
-
-  <!-- CONTACT PAGE -->
-  <section id="contact" class="contact-section container fade-up">
-    <div class="two-col">
-      <div class="contact-info">
-        <span class="section-subhead">Reach out</span>
-        <h2>Book your consultation</h2>
-        <p><i class="fas fa-map-pin"></i> Houston, Texas</p>
-        <p><i class="fas fa-phone-alt"></i> +1 (713) 555‑2024</p>
-        <p><i class="fas fa-envelope"></i> studio@adventhomes.com</p>
-        <div class="map-placeholder" style="background:#cfd8dc; display:flex; align-items:center; justify-content:center;">📍 Houston | Galleria area</div>
-      </div>
-      <div class="contact-form">
-        <input type="text" placeholder="Full name">
-        <input type="email" placeholder="Email">
-        <input type="tel" placeholder="Phone">
-        <textarea placeholder="Tell us about your dream pool" rows="4"></textarea>
-        <button class="btn-gold" style="width:auto; padding:1rem 3rem;">Book Free Consultation</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+  <!-- FOOTER (shared) -->
   <footer class="footer">
-    <div style="max-width:1200px; margin:auto;">
-      <h3 style="color:white;">ADVENT HOMES</h3>
-      <p style="margin:1rem 0;">Serving Houston’s finest estates and beyond.</p>
-      <div style="display:flex; gap:2rem; justify-content:center; margin:2rem 0;">
-        <a href="#" style="color:var(--gold);">Instagram</a>
-        <a href="#" style="color:var(--gold);">Houston Design</a>
-        <a href="#" style="color:var(--gold);">Pinterest</a>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">ADVENT HOMES</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-pin"></i> Houston, Texas</p>
+          <p><i class="fas fa-phone"></i> <a href="tel:+17135552024">713.555.2024</a></p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:studio@adventhomes.com">studio@adventhomes.com</a></p>
+        </div>
       </div>
-      <p style="color:#888;">© Advent Homes — Luxury Pool Builders. All rights reserved.</p>
+      <div class="footer-bottom">
+        <p>© Advent Homes — Luxury Pool Builders. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <script>
-    (function() {
-      // ----- STICKY NAV -----
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) navbar.classList.add('scrolled');
-        else navbar.classList.remove('scrolled');
-      });
-
-      // ----- TYPING ANIMATION (luxury slow) -----
-      const typingEl = document.getElementById('typing');
-      const staticLine = document.getElementById('static-line');
-      const phrases = [
-        { line: 'Luxury Custom Pools in Houston', static: '' },
-        { line: '', static: 'Designed. Engineered. Perfected.' }
-      ];
-      let phraseIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      let currentStatic = '';
-
-      function typeEffect() {
-        let currentPhrase = phrases[phraseIndex].line;
-        let targetStatic = phrases[phraseIndex].static;
-        if (!isDeleting && charIndex <= currentPhrase.length) {
-          typingEl.textContent = currentPhrase.substring(0, charIndex);
-          charIndex++;
-          setTimeout(typeEffect, 80); // slower for luxury
-        } else if (isDeleting && charIndex >= 0) {
-          typingEl.textContent = currentPhrase.substring(0, charIndex);
-          charIndex--;
-          setTimeout(typeEffect, 40);
-        } else {
-          if (!isDeleting && charIndex > currentPhrase.length) {
-            // show static line after finishing typing
-            if (phrases[phraseIndex].static) {
-              staticLine.textContent = phrases[phraseIndex].static;
-            }
-            // pause then start deleting
-            isDeleting = true;
-            setTimeout(typeEffect, 1800);
-          } else if (isDeleting && charIndex < 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            staticLine.textContent = ''; // clear static line
-            charIndex = 0;
-            setTimeout(typeEffect, 400);
-          } else {
-            setTimeout(typeEffect, 60);
-          }
-        }
-      }
-      typeEffect();
-
-      // ----- FLOATING LABELS -----
-      const inputGroups = document.querySelectorAll('.input-group');
-      inputGroups.forEach(group => {
-        const input = group.querySelector('input, textarea');
-        input.addEventListener('input', function() {
-          if (this.value.trim() !== '') group.classList.add('filled');
-          else group.classList.remove('filled');
-        });
-      });
-
-      // ----- SCROLL REVEAL (fade-up) -----
-      const fadeElements = document.querySelectorAll('.fade-up');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
-      fadeElements.forEach(el => observer.observe(el));
-
-      // ----- GALLERY FILTER (simple) -----
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const galleryItems = document.querySelectorAll('.gallery-item');
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const filter = btn.getAttribute('data-filter');
-          galleryItems.forEach(item => {
-            if (filter === 'all' || item.classList.contains(filter)) {
-              item.style.display = 'block';
-            } else {
-              item.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      // ----- SMOOTH SCROLL (internal links) -----
-      document.querySelectorAll('.nav-links a, .btn-outline').forEach(link => {
-        link.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href && href.startsWith('#')) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
-
-      // parallax effect on hero (subtle)
-      window.addEventListener('scroll', () => {
-        const hero = document.querySelector('.hero');
-        let scrolled = window.pageYOffset;
-        if (hero) hero.style.backgroundPositionY = -(scrolled * 0.3) + 'px';
-      });
-    })();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
