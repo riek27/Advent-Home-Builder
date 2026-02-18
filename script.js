@@ -1,159 +1,140 @@
-// Mobile Menu Toggle - Fixed Version
+// ========== script.js ==========
 document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const nav = document.getElementById('nav');
-    const body = document.body;
-
-    if (mobileMenuBtn && nav) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            nav.classList.toggle('active');
-            
-            // Toggle menu icon
-            if (nav.classList.contains('active')) {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-                // Prevent body scroll when menu is open
-                body.style.overflow = 'hidden';
-            } else {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                // Restore body scroll
-                body.style.overflow = '';
-            }
-        });
-
-        // Close menu when clicking on a link
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                body.style.overflow = '';
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (nav.classList.contains('active') && 
-                !nav.contains(e.target) && 
-                e.target !== mobileMenuBtn) {
-                nav.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                body.style.overflow = '';
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && nav.classList.contains('active')) {
-                nav.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                body.style.overflow = '';
-            }
-        });
+  // Sticky navbar
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
     }
+  });
 
-    // Header Scroll Effect
-    const header = document.getElementById('header');
-    if (header) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+  // Floating labels
+  const inputGroups = document.querySelectorAll('.input-group');
+  inputGroups.forEach(group => {
+    const input = group.querySelector('input, textarea');
+    if (input) {
+      input.addEventListener('input', function() {
+        if (this.value.trim() !== '') {
+          group.classList.add('filled');
+        } else {
+          group.classList.remove('filled');
+        }
+      });
+      // Check on load in case of browser autofill
+      if (input.value.trim() !== '') group.classList.add('filled');
     }
+  });
 
-    // Scroll Animation for Elements
-    function checkVisibility() {
-        const elements = document.querySelectorAll('.feature-card, .product-card, .testimonial-card, .service-card, .gallery-item');
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 100) {
-                element.classList.add('visible');
-            }
-        });
+  // Typing animation for subtitle on index page
+  const typingElement = document.getElementById('typing-subtitle');
+  if (typingElement) {
+    const phrases = [
+      'Luxury Custom Pools in Houston',
+      'Designed. Engineered. Perfected.'
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentPhrase = phrases[phraseIndex];
+      if (!isDeleting && charIndex <= currentPhrase.length) {
+        typingElement.textContent = currentPhrase.substring(0, charIndex);
+        charIndex++;
+        setTimeout(typeEffect, 80);
+      } else if (isDeleting && charIndex >= 0) {
+        typingElement.textContent = currentPhrase.substring(0, charIndex);
+        charIndex--;
+        setTimeout(typeEffect, 40);
+      } else {
+        if (!isDeleting && charIndex > currentPhrase.length) {
+          // pause
+          isDeleting = true;
+          setTimeout(typeEffect, 1500);
+        } else if (isDeleting && charIndex < 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          charIndex = 0;
+          setTimeout(typeEffect, 400);
+        } else {
+          setTimeout(typeEffect, 60);
+        }
+      }
     }
+    typeEffect();
+  }
 
-    window.addEventListener('scroll', checkVisibility);
-    window.addEventListener('load', checkVisibility);
-
-    // Smooth Scrolling for Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                if (nav && nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                        body.style.overflow = '';
-                    }
-                }
-            }
-        });
+  // Scroll reveal (fade-up)
+  const fadeElements = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
+  }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+  fadeElements.forEach(el => observer.observe(el));
 
-    // Image Slider Functionality
-    function initImageSlider() {
-        const slides = document.querySelectorAll('.slide');
-        if (slides.length === 0) return;
-        
-        let currentSlide = 0;
-        
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[index].classList.add('active');
-        }
-        
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-        
-        // Auto-advance slides every 5 seconds
-        setInterval(nextSlide, 5000);
-        
-        // Initialize first slide
-        showSlide(currentSlide);
-    }
-
-    // Initialize slider
-    initImageSlider();
-
-    // Contact Form Handling
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // In a real application, you would send the form data to a server here
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
+  // Gallery filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  if (filterBtns.length) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.classList.contains(filter)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
         });
-    }
+      });
+    });
+  }
+
+  // Simple form submission prevention (just for demo)
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your interest. A design consultant will contact you within 24 hours.');
+      form.reset();
+      inputGroups.forEach(g => g.classList.remove('filled'));
+    });
+  });
+
+  // Mobile menu toggle (simple expand/collapse for demo)
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const navCta = document.querySelector('.nav-cta');
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', () => {
+      if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
+        navCta.style.display = 'none';
+      } else {
+        navLinks.style.display = 'flex';
+        navCta.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navCta.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '60px';
+        navLinks.style.left = '0';
+        navLinks.style.width = '100%';
+        navLinks.style.background = 'rgba(255,255,255,0.95)';
+        navLinks.style.padding = '1rem';
+        navCta.style.position = 'absolute';
+        navCta.style.top = '200px';
+        navCta.style.left = '0';
+        navCta.style.width = '100%';
+        navCta.style.padding = '1rem';
+        navCta.style.background = 'rgba(255,255,255,0.95)';
+      }
+    });
+  }
 });
